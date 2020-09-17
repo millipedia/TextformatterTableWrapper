@@ -1,0 +1,39 @@
+<?php namespace ProcessWire;
+
+/**
+ * 201907
+ * 
+ * Simple Textformatter to wrap tables with a div.
+ * We use this to allow tables to scroll sideways on small devices.
+ * 
+ * Stephen
+ * millipedia.com
+ * 
+ */
+
+class TextformatterTableWrapper extends Textformatter {
+
+	public static function getModuleInfo() {
+    return [
+      'author' => 'Stephen @ millipedia',
+      'title' => 'Table Wrapper',
+      'summary' => 'Wraps any tables with a DIV tag.',
+      'version' => '0.0.1',
+  ];
+	}
+
+
+public function format(&$str) {
+
+        if (strpos($str, '<table') === false) return;
+
+        if (!preg_match_all('#<table.*>(.|\n)*?<\/table>#', $str, $matches)) return;
+
+
+         foreach($matches[0] as $key => $line) {
+              
+              $str = str_replace($line, "<div class='table-wrapper'>$line</div>", $str);
+       }
+
+      }
+    }
