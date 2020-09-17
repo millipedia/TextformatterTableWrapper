@@ -4,14 +4,18 @@ Simple Processwire TextFormatter to wrap a table in a div.
 
 We use this to stop tables becoming unreadble on small devices by setting a min width and overflow-x: scroll on the wrapper. 
 
-`.table-wrapper{  
+```css
+
+.table-wrapper{  
     max-width: 100%;  
     overflow-x: scroll;
 }
 
 .table-wrapper > table{
     min-width: 480px;
-}`
+}
+
+```
 
 ## Installation
 
