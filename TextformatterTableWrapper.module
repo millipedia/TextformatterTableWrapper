@@ -1,4 +1,6 @@
-<?php namespace ProcessWire;
+<?php
+
+namespace ProcessWire;
 
 /**
  * 201907
@@ -11,29 +13,30 @@
  * 
  */
 
-class TextformatterTableWrapper extends Textformatter {
+class TextformatterTableWrapper extends Textformatter
+{
 
-	public static function getModuleInfo() {
-    return [
-      'author' => 'Stephen @ millipedia',
-      'title' => 'Table Wrapper',
-      'summary' => 'Wraps any tables with a DIV tag.',
-      'version' => '0.0.1',
-  ];
+	public static function getModuleInfo()
+	{
+		return [
+			'author' => 'Stephen @ millipedia',
+			'title' => 'Table Wrapper',
+			'summary' => 'Wraps any tables with a DIV tag.',
+			'version' => '0.0.1',
+		];
 	}
 
 
-public function format(&$str) {
+	public function format(&$str)
+	{
 
-        if (strpos($str, '<table') === false) return;
+		if (strpos($str, '<table') === false) return;
 
-        if (!preg_match_all('#<table.*>(.|\n)*?<\/table>#', $str, $matches)) return;
+		if (!preg_match_all('#<table[^>]*>.*?<\/table>#s', $str, $matches)) return;
 
+		foreach ($matches[0] as $key => $line) {
 
-         foreach($matches[0] as $key => $line) {
-              
-              $str = str_replace($line, "<div class='table-wrapper'>$line</div>", $str);
-       }
-
-      }
-    }
+			$str = str_replace($line, "<div class='table-wrapper'>$line</div>", $str);
+		}
+	}
+}
